@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOREST POLICE</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0c10;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* حاوية الصفحة الرئيسية */
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 35px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 35px;
+            color: #1f2833;
+            text-shadow: 0 0 10px #45f3ff, 0 0 20px #45f3ff;
+            -webkit-text-stroke: 1px #45f3ff;
+            font-weight: 900;
+        }
+
+        .links-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* أزرار متموجة ثابتة بالكامل */
+        .btn-link {
+            display: block;
+            width: 100%;
+            padding: 18px 20px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0f1c3f 0%, #005c8a 50%, #00b4db 100%);
+            background-size: 200% auto;
+            box-shadow: 0 4px 15px rgba(0, 180, 219, 0.3);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(69, 243, 255, 0.3);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-link:hover, .btn-link:active {
+            background-position: right center;
+            box-shadow: 0 6px 20px rgba(0, 243, 255, 0.5);
+            transform: translateY(-2px);
+            border-color: #45f3ff;
+        }
+
+        /* إطار عرض الصفحات الخارجية */
+        #page-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0b0c10;
+            z-index: 9999;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* زر الرجوع الذكي */
+        .back-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #0f1c3f, #005c8a);
+            color: #fff;
+            border: 1px solid #45f3ff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 10000;
+            box-shadow: 0 0 15px rgba(69, 243, 255, 0.4);
+            font-size: 1rem;
+        }
+
+        /* أيقونة التعديل السرية */
+        .edit-icon {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0.3;
+            z-index: 950;
+        }
+
+        .edit-icon:hover {
+            opacity: 1;
+            border-color: #45f3ff;
+        }
+
+        .edit-icon svg {
+            fill: #45f3ff;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* نافذة التعديل المنبثقة */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 20000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #11141a;
+            padding: 25px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #005c8a;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 15px;
+            color: #45f3ff;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            background: #1f242d;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #fff;
+            text-align: right;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+
+        .modal-actions button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .save-btn { background: #00b4db; color: #fff; }
+        .close-btn { background: #333; color: #fff; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-container">
+        <h1>FOREST POLICE</h1>
+        <div class="links-wrapper">
+            <!-- الأزرار مدمجة كـ HTML أساسي لضمان ظهورها الفوري -->
+            <button class="btn-link" id="btn1" onclick="openPage(this.getAttribute('data-url'))">مايكرو الخاص بفصيل شرطه فورست</button>
+            <button class="btn-link" id="btn2" onclick="openPage(this.getAttribute('data-url'))">دليل الشرطة</button>
+        </div>
+    </div>
+
+    <!-- شاشة الـ Iframe لعرض الصفحات مع زر العودة -->
+    <div id="page-viewer">
+        <button class="back-btn" onclick="closePage()">رجوع للخلف ↩</button>
+        <iframe id="iframe-target" src=""></iframe>
+    </div>
+
+    <!-- أيقونة التعديل السرية (أسفل اليسار) -->
+    <div class="edit-icon" onclick="openEditWizard()" title="تعديل الروابط">
+        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+    </div>
+
+    <!-- نافذة التعديل المحمية برمز السري -->
+    <div class="modal" id="edit-modal">
+        <div class="modal-content">
+            <h3>تعديل محتوى الصفحة</h3>
+            <label>الخيار الأول:</label>
+            <input type="text" id="title1">
+            <input type="url" id="url1" dir="ltr">
+            
+            <label>الخيار الثاني:</label>
+            <input type="text" id="title2">
+            <input type="url" id="url2" dir="ltr">
+            
+            <div class="modal-actions">
+                <button class="close-btn" onclick="closeModal()">إلغاء</button>
+                <button class="save-btn" onclick="saveData()">حفظ</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // الروابط الافتراضية الثابتة
+        const defaultData = {
+            btn1_title: "مايكرو الخاص بفصيل شرطه فورست",
+            btn1_url: "https://a-bforest.github.io/Micro-Police-Forest/",
+            btn2_title: "دليل الشرطة",
+            btn2_url: "https://a-bforest.github.io/forest/"
+        };
+
+        function setupLinks() {
+            const b1 = document.getElementById('btn1');
+            const b2 = document.getElementById('btn2');
+
+            b1.innerText = localStorage.getItem('btn1_title') || defaultData.btn1_title;
+            b1.setAttribute('data-url', localStorage.getItem('btn1_url') || defaultData.btn1_url);
+
+            b2.innerText = localStorage.getItem('btn2_title') || defaultData.btn2_title;
+            b2.setAttribute('data-url', localStorage.getItem('btn2_url') || defaultData.btn2_url);
+        }
+
+        function openPage(url) {
+            if(url) {
+                document.getElementById('iframe-target').src = url;
+                document.getElementById('page-viewer').style.display = 'block';
+            }
+        }
+
+        function closePage() {
+            document.getElementById('page-viewer').style.display = 'none';
+            document.getElementById('iframe-target').src = '';
+        }
+
+        function openEditWizard() {
+            const password = prompt("الرجاء إدخال رمز المرور للتعديل:");
+            if (password === "1221") {
+                document.getElementById('title1').value = localStorage.getItem('btn1_title') || defaultData.btn1_title;
+                document.getElementById('url1').value = localStorage.getItem('btn1_url') || defaultData.btn1_url;
+                document.getElementById('title2').value = localStorage.getItem('btn2_title') || defaultData.btn2_title;
+                document.getElementById('url2').value = localStorage.getItem('btn2_url') || defaultData.btn2_url;
+                document.getElementById('edit-modal').style.display = 'flex';
+            } else if (password !== null) {
+                alert("رمز المرور خاطئ!");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('edit-modal').style.display = 'none';
+        }
+
+        function saveData() {
+            localStorage.setItem('btn1_title', document.getElementById('title1').value);
+            localStorage.setItem('btn1_url', document.getElementById('url1').value);
+            localStorage.setItem('btn2_title', document.getElementById('title2').value);
+            localStorage.setItem('btn2_url', document.getElementById('url2').value);
+            
+            closeModal();
+            setupLinks();
+            alert("تم حفظ التعديلات بنجاح!");
+        }
+
+        // تنفيذ فوري عند تحميل الملف
+        setupLinks();
+    </script>
+</body>
+</html>
