@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحة تسجيل الدخول</title>
+    <title>الصفحة الرئيسية</title>
     <style>
-        /* 1. تعديل الخلفية لتصبح بحجم الشاشة الكامل باللون الأسود المرصع بالذهبي */
+        /* إعدادات الشاشة الكاملة باللون الأسود المرصع بالذهبي */
         * {
             box-sizing: border-box;
         }
@@ -15,12 +15,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            /* تأثير الخلفية السوداء الفاخرة المرصعة بالنقاط الذهبية اللامعة */
             background: radial-gradient(circle at 50% 50%, #161208 0%, #000000 100%);
             background-image: 
                 radial-gradient(circle at 50% 50%, #161208 0%, #000000 100%),
@@ -28,102 +23,257 @@
                 radial-gradient(rgba(212, 175, 55, 0.15) 2px, transparent 2px);
             background-size: 100% 100%, 40px 40px, 60px 60px;
             background-position: 0 0, 0 0, 20px 20px;
-            
-            /* توسيط العناصر في منتصف الشاشة تماماً */
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
 
-        /* تصميم صندوق الدخول لتناسق المظهر */
-        .login-box {
-            background: rgba(0, 0, 0, 0.75);
+        /* حاوية الأزرار الرئيسية */
+        .main-container {
+            background: rgba(0, 0, 0, 0.8);
             padding: 40px;
             border-radius: 15px;
-            border: 1px solid #d4af37; /* إطار ذهبي ناعم */
+            border: 1px solid #d4af37;
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
             text-align: center;
-            width: 100%;
-            max-width: 400px;
+            width: 90%;
+            max-width: 450px;
         }
 
-        .login-box h2 {
+        .main-container h2 {
             color: #d4af37;
             margin-bottom: 30px;
+            font-size: 24px;
         }
 
-        /* تصميم حقل كلمة المرور وزر الإظهار */
+        /* تصميم أزرار التوجيه (المايكرو ودليل الشرطة) */
+        .nav-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: transparent;
+            border: 1px solid #d4af37;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: #d4af37;
+            color: #000;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* زر التعديل السفلي */
+        .edit-trigger-btn {
+            background: none;
+            border: none;
+            color: #d4af37;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        /* نافذة طلب كلمة المرور المنبثقة (مخفية بالبداية) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .password-box {
+            background: #0a0a0a;
+            border: 1px solid #d4af37;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            width: 85%;
+            max-width: 350px;
+        }
+
         .password-container {
             position: relative;
             width: 100%;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
 
         .password-container input {
             width: 100%;
-            padding: 12px 15px;
-            padding-left: 60px; /* ترك مسافة لزر الإظهار جهة اليسار */
+            padding: 12px;
+            padding-left: 55px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid #555;
-            border-radius: 8px;
+            border-radius: 6px;
             color: #fff;
-            font-size: 16px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .password-container input:focus {
-            border-color: #d4af37;
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+            text-align: center;
         }
 
         .toggle-btn {
             position: absolute;
-            left: 15px;
+            left: 12px;
             top: 50%;
             transform: translateY(-50%);
             color: #d4af37;
             cursor: pointer;
-            font-size: 14px;
-            user-select: none;
+            font-size: 13px;
             font-weight: bold;
         }
 
-        .toggle-btn:hover {
+        .action-btn {
+            width: 100%;
+            padding: 10px;
+            background: #d4af37;
+            border: none;
+            color: #000;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        /* لوحة تعديل الروابط (تظهر فقط بعد كتابة الرمز الصحيح) */
+        #editPanel {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #d4af37;
+            text-align: right;
+        }
+
+        #editPanel label {
+            color: #d4af37;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #editPanel input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: #222;
+            border: 1px solid #d4af37;
             color: #fff;
+            border-radius: 6px;
+            direction: ltr;
         }
     </style>
 </head>
 <body>
 
-    <div class="login-box">
-        <h2>تسجيل الدخول</h2>
+    <!-- النافذة الأساسية الظاهرة للجميع دائماً -->
+    <div class="main-container">
+        <h2>بوابة الاختصارات السريعة</h2>
         
-        <div class="password-container">
-            <!-- حقل كلمة المرور النظيف -->
-            <input type="password" id="passwordField" placeholder="أدخل كلمة المرور">
-            
-            <!-- زر الإظهار والإخفاء الذي يحل مشكلة الأقواس -->
-            <span class="toggle-btn" id="togglePassword" onclick="togglePass()">إظهار</span>
+        <!-- أزرار الدخول للخانات -->
+        <a href="https://google.com" id="linkMicro" class="nav-btn" target="_blank">دخول المايكرو</a>
+        <a href="https://google.com" id="linkPolice" class="nav-btn" target="_blank">دليل الشرطة</a>
+
+        <!-- زر التعديل بالأسفل -->
+        <button class="edit-trigger-btn" onclick="openPasswordModal()">تعديل الروابط</button>
+
+        <!-- لوحة تعديل الروابط المخفية (تفتح بعد الرمز 1221) -->
+        <div id="editPanel">
+            <label>رابط خانة المايكرو الجديد:</label>
+            <input type="text" id="inputMicroUrl" placeholder="https://example.com">
+
+            <label>رابط دليل الشرطة الجديد:</label>
+            <input type="text" id="inputPoliceUrl" placeholder="https://example.com">
+
+            <button class="action-btn" onclick="saveNewLinks()">حفظ الروابط الجديدة</button>
         </div>
     </div>
 
-    <!-- 2. كود الجافا سكريبت لحل مشكلة إظهار كلمة المرور بدون أقواس -->
+    <!-- نافذة طلب الرمز المنبثقة (تظهر عند الضغط على تعديل الروابط) -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="password-box">
+            <h3 style="color: #d4af37; margin: 0;">أدخل رمز التحقق</h3>
+            <div class="password-container">
+                <input type="password" id="adminPassword" placeholder="الرمز السري">
+                <span class="toggle-btn" id="togglePassword" onclick="togglePass()">إظهار</span>
+            </div>
+            <button class="action-btn" onclick="verifyPassword()">تحقق</button>
+            <button class="action-btn" style="background:#555; color:#fff;" onclick="closePasswordModal()">إلغاء</button>
+        </div>
+    </div>
+
     <script>
+        // دالة تحميل الروابط المحفوظة عند فتح الصفحة لأول مرة
+        window.onload = function() {
+            if(localStorage.getItem("microUrl")) {
+                document.getElementById("linkMicro").href = localStorage.getItem("microUrl");
+                document.getElementById("inputMicroUrl").value = localStorage.getItem("microUrl");
+            }
+            if(localStorage.getItem("policeUrl")) {
+                document.getElementById("linkPolice").href = localStorage.getItem("policeUrl");
+                document.getElementById("inputPoliceUrl").value = localStorage.getItem("policeUrl");
+            }
+        }
+
+        // فتح نافذة الرمز
+        function openPasswordModal() {
+            document.getElementById("passwordModal").style.display = "flex";
+            document.getElementById("adminPassword").value = "";
+        }
+
+        // إغلاق نافذة الرمز
+        function closePasswordModal() {
+            document.getElementById("passwordModal").style.display = "none";
+        }
+
+        // إظهار وإخفاء كلمة المرور بدون أقواس
         function togglePass() {
-            var passwordField = document.getElementById("passwordField");
+            var passField = document.getElementById("adminPassword");
             var toggleText = document.getElementById("togglePassword");
-            
-            // نغير فقط نوع الحقل (Type) للحفاظ على النص الأصلي دون تعديل أو إضافة أقواس
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
+            if (passField.type === "password") {
+                passField.type = "text";
                 toggleText.textContent = "إخفاء";
             } else {
-                passwordField.type = "password";
+                passField.type = "password";
                 toggleText.textContent = "إظهار";
             }
         }
-    </script>
 
+        // التحقق من الرمز 1221 لإظهار لوحة التعديل
+        function verifyPassword() {
+            var inputCode = document.getElementById("adminPassword").value;
+            if (inputCode === "1221") {
+                closePasswordModal();
+                document.getElementById("editPanel").style.display = "block"; // إظهار خانات التعديل
+                alert("تم التحقق بنجاح! يمكنك الآن تعديل الروابط بالأسفل.");
+            } else {
+                alert("الرمز السري خاطئ! لا يمكنك التعديل.");
+            }
+        }
+
+        // حفظ الروابط الجديدة في المتصفح وتطبيقها على الأزرار فوراً
+        function saveNewLinks() {
+            var newMicro = document.getElementById("inputMicroUrl").value;
+            var newPolice = document.getElementById("inputPoliceUrl").value;
+
+            if(newMicro) {
+                document.getElementById("linkMicro").href = newMicro;
+                localStorage.setItem("microUrl", newMicro);
+            }
+            if(newPolice) {
+                document.getElementById("linkPolice").href = newPolice;
+                localStorage.setItem("policeUrl", newPolice);
+            }
+
+            alert("تم حفظ وتحديث الروابط بنجاح!");
+            document.getElementById("editPanel").style.display = "none"; // إخفاء لوحة التعديل بعد الحفظ
+        }
+    </script>
 </body>
 </html>
