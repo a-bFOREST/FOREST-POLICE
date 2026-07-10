@@ -6,8 +6,6 @@
     <title>Forest Police Hub - Luxury Gold</title>
     <style>
         :root {
-            --bg-color: #050505; /* أسود عميق */
-            --card-bg: linear-gradient(135deg, #111111, #1a1a1a, #28231a); /* مزيج أسود مع لمحة ذهبية خافتة */
             --neon-gold: #ffdf00; /* ذهبي ناصع */
             --gold-glow: 0 0 15px #ffd700, 0 0 30px #b8860b; /* توهج ذهبي ملكي */
             --text-color: #ffffff;
@@ -16,14 +14,18 @@
         body {
             margin: 0;
             padding: 20px;
-            background-color: var(--bg-color);
+            /* استخدمت الصورة كخلفية هنا */
+            background-image: url('55563.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background-image: radial-gradient(circle at 50% 50%, #16120b 0%, #050505 100%); /* خلفية مرصعة بظلال ذهبية خفيفة */
         }
 
         .container {
@@ -33,16 +35,17 @@
             flex-direction: column;
             gap: 25px;
             margin-top: 20px;
+            /* أضفت خلفية شبه شفافة لتسهيل قراءة المحتوى */
+            background: rgba(0, 0, 0, 0.6); 
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 223, 0, 0.2); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 223, 0, 0.05);
         }
 
         /* الشعار العلوي */
         .header-card {
-            background: rgba(15, 15, 15, 0.8);
-            border: 1px solid rgba(255, 223, 0, 0.2);
-            border-radius: 15px;
-            padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 223, 0, 0.05);
             position: relative;
         }
 
@@ -57,7 +60,7 @@
 
         /* الأزرار / الخيارات */
         .main-btn {
-            background: var(--card-bg);
+            background: linear-gradient(135deg, #111111, #1a1a1a, #28231a); /* مزيج أسود مع لمحة ذهبية خافتة */
             border: 1px solid rgba(255, 223, 0, 0.15); /* إطار ذهبي خفيف جداً */
             border-radius: 15px;
             padding: 25px 20px;
