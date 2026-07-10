@@ -3,365 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FOREST POLICE</title>
+    <title>Forest Police Hub - Luxury Gold</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --bg-color: #050505; /* أسود عميق */
+            --card-bg: linear-gradient(135deg, #111111, #1a1a1a, #28231a); /* مزيج أسود مع لمحة ذهبية خافتة */
+            --neon-gold: #ffdf00; /* ذهبي ناصع */
+            --gold-glow: 0 0 15px #ffd700, 0 0 30px #b8860b; /* توهج ذهبي ملكي */
+            --text-color: #ffffff;
         }
 
         body {
-            background-color: #0b0c10;
-            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 30px 15px;
-            overflow-y: auto;
+            background-image: radial-gradient(circle at 50% 50%, #16120b 0%, #050505 100%); /* خلفية مرصعة بظلال ذهبية خفيفة */
         }
 
-        /* حاوية الصفحة الممتدة بالكامل */
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             display: flex;
             flex-direction: column;
-            gap: 40px; /* تم تكبير المسافة هنا لعمل فرق كبير ومساحة فاضية بين الأزرار */
-            margin-top: 10px;
-            padding-bottom: 40px;
+            gap: 25px;
+            margin-top: 20px;
         }
 
-        /* الهيدر العلوي المحيط بالعناوين */
-        .header-box {
-            width: 100%;
+        /* الشعار العلوي */
+        .header-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(255, 223, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 223, 0, 0.05);
+            position: relative;
+        }
+
+        .header-logo {
+            max-width: 100%;
+            height: auto;
+            max-height: 120px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* الأزرار / الخيارات */
+        .main-btn {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 223, 0, 0.15); /* إطار ذهبي خفيف جداً */
+            border-radius: 15px;
             padding: 25px 20px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            border: 1px solid rgba(69, 243, 255, 0.15);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            margin-bottom: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            letter-spacing: 2px;
-            color: #ffffff;
-            text-shadow: 0 0 10px #45f3ff, 0 0 20px #45f3ff;
-            -webkit-text-stroke: 1px #45f3ff;
-            font-weight: 900;
-            margin-bottom: 8px;
-        }
-
-        /* اسم مسؤول الفصيل مضاف بشكل دائم وبنفس التوهج اللوني */
-        .leader-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #ffffff;
-            text-shadow: 0 0 8px #45f3ff, 0 0 15px #45f3ff;
-            -webkit-text-stroke: 0.5px #45f3ff;
-            margin-bottom: 10px;
-        }
-
-        .sub-header {
-            font-size: 0.9rem;
-            color: #8892b0;
-            letter-spacing: 1px;
-        }
-
-        /* تصميم الأزرار المتموجة الكاملة */
-        .btn-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 24px 20px;
-            color: #ffffff;
             text-decoration: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #0a142c 0%, #003b5c 60%, #007a99 100%);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(69, 243, 255, 0.15);
-            cursor: pointer;
-            text-align: center;
+            color: var(--text-color);
+            display: block;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
         }
 
-        .btn-link:hover, .btn-link:active {
-            box-shadow: 0 0 20px rgba(69, 243, 255, 0.4);
+        .main-btn:hover {
             transform: translateY(-3px);
-            border-color: #45f3ff;
-            background: linear-gradient(135deg, #0f1c3f 0%, #005c8a 50%, #00b4db 100%);
+            box-shadow: var(--gold-glow);
+            border-color: var(--neon-gold);
         }
 
         .btn-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #45f3ff;
-            margin-bottom: 6px;
-            text-shadow: 0 0 5px rgba(69, 243, 255, 0.2);
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--neon-gold);
+            text-shadow: 0 0 10px rgba(255, 223, 0, 0.4);
+            margin-bottom: 8px;
         }
 
         .btn-desc {
-            font-size: 0.9rem;
-            color: #a8b2d1;
-            font-weight: 400;
+            font-size: 14px;
+            color: #ccccba; /* رمادي مائل للذهبي الخافت */
         }
 
-        /* شاشة عرض الصفحات الخارجية */
-        #page-viewer {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0b0c10;
-            z-index: 9999;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
+        /* زر الإعدادات المخفي */
+        .admin-trigger {
+            margin-top: auto;
+            padding: 10px;
+            background: none;
             border: none;
-        }
-
-        .back-btn {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #0a142c, #003b5c);
-            color: #fff;
-            border: 1px solid #45f3ff;
-            border-radius: 8px;
+            color: #4a3f28;
             cursor: pointer;
-            font-weight: bold;
-            z-index: 10000;
-            box-shadow: 0 0 15px rgba(69, 243, 255, 0.4);
-            font-size: 1rem;
+            font-size: 12px;
+            transition: color 0.2s;
+        }
+        .admin-trigger:hover {
+            color: var(--neon-gold);
         }
 
-        /* أيقونة التعديل السرية */
-        .edit-icon {
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            opacity: 0.2;
-            z-index: 950;
-        }
-
-        .edit-icon:hover {
-            opacity: 1;
-            border-color: #45f3ff;
-        }
-
-        .edit-icon svg {
-            fill: #45f3ff;
-            width: 20px;
-            height: 20px;
-        }
-
-        /* نافذة التعديل المنبثقة */
-        .modal {
+        /* نافذة التحكم الإدارية */
+        .admin-modal {
             display: none;
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 20000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: #11141a;
-            padding: 25px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #111111;
+            border: 2px solid var(--neon-gold);
             border-radius: 15px;
-            width: 100%;
+            padding: 20px;
+            z-index: 1000;
+            width: 90%;
             max-width: 400px;
-            border: 1px solid #005c8a;
+            box-shadow: var(--gold-glow), 0 0 50px rgba(0,0,0,0.9);
         }
 
-        .modal-content h3 {
-            margin-bottom: 15px;
-            color: #45f3ff;
+        .admin-modal h3 {
+            margin-top: 0;
+            color: var(--neon-gold);
+            text-align: center;
         }
 
-        .modal-content label {
-            display: block;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #ccc;
+        .admin-modal label {
+            color: #dddddd;
+            font-size: 14px;
         }
 
-        .modal-content input {
+        .admin-modal input {
             width: 100%;
-            padding: 11px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            background: #1f242d;
-            border: 1px solid #333;
-            border-radius: 6px;
-            color: #fff;
-            text-align: right;
+            padding: 10px;
+            margin: 8px 0 18px 0;
+            box-sizing: border-box;
+            background: #222222;
+            border: 1px solid #444444;
+            color: white;
+            border-radius: 5px;
+        }
+        .admin-modal input:focus {
+            border-color: var(--neon-gold);
+            outline: none;
         }
 
-        .modal-actions {
+        .modal-btns {
             display: flex;
             gap: 10px;
             justify-content: flex-end;
-            margin-top: 15px;
         }
 
-        .modal-actions button {
-            padding: 8px 16px;
+        .modal-btns button {
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
         }
 
-        .save-btn { background: #00b4db; color: #fff; }
-        .close-btn { background: #333; color: #fff; }
+        .btn-save { background: var(--neon-gold); color: #000000; }
+        .btn-close { background: #333333; color: white; }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container" id="main-container">
+    <div class="container">
         
-        <!-- الهيدر العلوي العريض -->
-        <div class="header-box">
-            <h1>FOREST POLICE</h1>
-            <div class="leader-title">Moderator Zulfiqar</div>
-            <div class="sub-header">OFFICIAL HUB | MANAGEMENT SYSTEM</div>
+        <!-- قسم الشعار العلوي (الأسود والذهبي) -->
+        <div class="header-card">
+            <!-- الشعار الافتراضي هنا أصبح باللون الأسود والذهبي تلقائياً -->
+            <img id="main-logo" class="header-logo" src="https://placehold.co/600x200/0a0a0a/ffdf00?text=FOREST+POLICE" alt="Logo">
         </div>
 
-        <!-- الأزرار وبينهما مسافة جاب كبيرة -->
-        <button class="btn-link" id="btn1" onclick="openPage(this.getAttribute('data-url'))">
-            <span class="btn-title" id="t1">مايكرو الخاص بفصيل شرطه فورست</span>
-            <span class="btn-desc">قائمة الأوامر والانتهاكات الكاملة للفصيل</span>
-        </button>
+        <!-- الخيار الأول: مايكرو فصيل فورست -->
+        <a href="#" id="link1" class="main-btn" target="_blank">
+            <div class="btn-title">مايكرو الخاص بفصيل شرطة فورست</div>
+            <div class="btn-desc">قائمة الأوامر والانتهاكات الكاملة للفصيل</div>
+        </a>
 
-        <button class="btn-link" id="btn2" onclick="openPage(this.getAttribute('data-url'))">
-            <span class="btn-title" id="t2">دليل الشرطة</span>
-            <span class="btn-desc">الأنظمة والتعليمات والقوانين الإرشادية</span>
-        </button>
+        <!-- الخيار الثاني: دليل شرطة فورست -->
+        <a href="#" id="link2" class="main-btn" target="_blank">
+            <div class="btn-title">دليل شرطة فورست</div>
+            <div class="btn-desc">الأنظمة والتعليمات والقوانين الإرشادية</div>
+        </a>
+
+        <!-- زر الإدارة السري -->
+        <button class="admin-trigger" onclick="checkCode()">⚙️ إدارة الموقع</button>
+    </div>
+
+    <!-- لوحة التحكم -->
+    <div class="overlay" id="overlay"></div>
+    <div class="admin-modal" id="adminModal">
+        <h3>لوحة التحكم الفخمة</h3>
+        <label>رابط الصورة العلوية (الشعار):</label>
+        <input type="text" id="input-logo" placeholder="ضع رابط الصورة الذهبية هنا">
         
-    </div>
-
-    <!-- شاشة الـ Iframe الكاملة مع زر العودة للديسكورد والموبايل -->
-    <div id="page-viewer">
-        <button class="back-btn" onclick="closePage()">رجوع للخلف ↩</button>
-        <iframe id="iframe-target" src=""></iframe>
-    </div>
-
-    <!-- أيقونة التعديل السرية (أسفل اليسار) -->
-    <div class="edit-icon" onclick="openEditWizard()" title="تعديل الروابط">
-        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-    </div>
-
-    <!-- نافذة التعديل المحمية بالرمز السري -->
-    <div class="modal" id="edit-modal">
-        <div class="modal-content">
-            <h3>تعديل محتوى الصفحة</h3>
-            <label>عنوان الخيار الأول:</label>
-            <input type="text" id="title1">
-            <label>رابط الخيار الأول:</label>
-            <input type="url" id="url1" dir="ltr">
-            
-            <label>عنوان الخيار الثاني:</label>
-            <input type="text" id="title2">
-            <label>رابط الخيار الثاني:</label>
-            <input type="url" id="url2" dir="ltr">
-            
-            <div class="modal-actions">
-                <button class="close-btn" onclick="closeModal()">إلغاء</button>
-                <button class="save-btn" onclick="saveData()">حفظ التغييرات</button>
-            </div>
+        <label>رابط المايكرو (الخيار الأول):</label>
+        <input type="text" id="input-link1" placeholder="https://...">
+        
+        <label>رابط الدليل (الخيار الثاني):</label>
+        <input type="text" id="input-link2" placeholder="https://...">
+        
+        <div class="modal-btns">
+            <button class="btn-save" onclick="saveSettings()">حفظ التعديلات</button>
+            <button class="btn-close" onclick="closeAdmin()">إلغاء</button>
         </div>
     </div>
 
     <script>
-        const defaultData = {
-            btn1_title: "مايكرو الخاص بفصيل شرطه فورست",
-            btn1_url: "https://a-bforest.github.io/Micro-Police-Forest/",
-            btn2_title: "دليل الشرطة",
-            btn2_url: "https://a-bforest.github.io/forest/"
-        };
+        // الرمز السري المطلوب
+        const SECRET_CODE = "1221";
 
-        function setupLinks() {
-            const b1 = document.getElementById('btn1');
-            const b2 = document.getElementById('btn2');
-            const t1 = document.getElementById('t1');
-            const t2 = document.getElementById('t2');
-
-            t1.innerText = localStorage.getItem('btn1_title') || defaultData.btn1_title;
-            b1.setAttribute('data-url', localStorage.getItem('btn1_url') || defaultData.btn1_url);
-
-            t2.innerText = localStorage.getItem('btn2_title') || defaultData.btn2_title;
-            b2.setAttribute('data-url', localStorage.getItem('btn2_url') || defaultData.btn2_url);
-        }
-
-        function openPage(url) {
-            if(url) {
-                document.getElementById('iframe-target').src = url;
-                document.getElementById('page-viewer').style.display = 'block';
+        // تحميل البيانات من ذاكرة المتصفح
+        window.onload = function() {
+            if(localStorage.getItem('logoUrl_gold')) {
+                document.getElementById('main-logo').src = localStorage.getItem('logoUrl_gold');
+            }
+            if(localStorage.getItem('url1_gold')) {
+                document.getElementById('link1').href = localStorage.getItem('url1_gold');
+            }
+            if(localStorage.getItem('url2_gold')) {
+                document.getElementById('link2').href = localStorage.getItem('url2_gold');
             }
         }
 
-        function closePage() {
-            document.getElementById('page-viewer').style.display = 'none';
-            document.getElementById('iframe-target').src = '';
-        }
-
-        function openEditWizard() {
-            const password = prompt("الرجاء إدخال رمز المرور للتعديل:");
-            if (password === "1221") {
-                document.getElementById('title1').value = localStorage.getItem('btn1_title') || defaultData.btn1_title;
-                document.getElementById('url1').value = localStorage.getItem('btn1_url') || defaultData.btn1_url;
-                document.getElementById('title2').value = localStorage.getItem('btn2_title') || defaultData.btn2_title;
-                document.getElementById('url2').value = localStorage.getItem('btn2_url') || defaultData.btn2_url;
-                document.getElementById('edit-modal').style.display = 'flex';
+        // التحقق من الرمز السري 1221
+        function checkCode() {
+            let password = prompt("الرجاء إدخال الرمز السري للتعديل:");
+            if (password === SECRET_CODE) {
+                openAdmin();
             } else if (password !== null) {
-                alert("رمز المرور خاطئ!");
+                alert("الرمز السري خاطئ!");
             }
         }
 
-        function closeModal() {
-            document.getElementById('edit-modal').style.display = 'none';
-        }
-
-        function saveData() {
-            localStorage.setItem('btn1_title', document.getElementById('title1').value);
-            localStorage.setItem('btn1_url', document.getElementById('url1').value);
-            localStorage.setItem('btn2_title', document.getElementById('title2').value);
-            localStorage.setItem('btn2_url', document.getElementById('url2').value);
+        function openAdmin() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('adminModal').style.display = 'block';
             
-            closeModal();
-            setupLinks();
-            alert("تم التحديث بنجاح!");
+            document.getElementById('input-logo').value = document.getElementById('main-logo').src;
+            document.getElementById('input-link1').value = document.getElementById('link1').href;
+            document.getElementById('input-link2').value = document.getElementById('link2').href;
         }
 
-        setupLinks();
+        function closeAdmin() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        function saveSettings() {
+            let logoUrl = document.getElementById('input-logo').value;
+            let url1 = document.getElementById('input-link1').value;
+            let url2 = document.getElementById('input-link2').value;
+
+            if(logoUrl) {
+                document.getElementById('main-logo').src = logoUrl;
+                localStorage.setItem('logoUrl_gold', logoUrl);
+            }
+            if(url1) {
+                document.getElementById('link1').href = url1;
+                localStorage.setItem('url1_gold', url1);
+            }
+            if(url2) {
+                document.getElementById('link2').href = url2;
+                localStorage.setItem('url2_gold', url2);
+            }
+
+            alert("تم حفظ التعديلات بنجاح بالثيم الذهبي الجديد!");
+            closeAdmin();
+        }
     </script>
 </body>
 </html>
