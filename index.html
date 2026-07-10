@@ -3,281 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forest Police Hub - Luxury Gold</title>
+    <title>صفحة تسجيل الدخول</title>
     <style>
-        :root {
-            --neon-gold: #ffdf00;
-            --gold-glow: 0 0 15px #ffd700, 0 0 30px #b8860b;
-            --text-color: #ffffff;
+        /* 1. تعديل الخلفية لتصبح بحجم الشاشة الكامل باللون الأسود المرصع بالذهبي */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            margin: 0;
-            padding: 20px;
-            /* تم دمج خلفيتك الفاخرة هنا بالكامل لتظهر بشكل صحيح دائماً */
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABAAAAAMACAYAAACeFf7eAAA=...[تم تشفير الصورة بالكامل داخل الملف]'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-color);
+            /* تأثير الخلفية السوداء الفاخرة المرصعة بالنقاط الذهبية اللامعة */
+            background: radial-gradient(circle at 50% 50%, #161208 0%, #000000 100%);
+            background-image: 
+                radial-gradient(circle at 50% 50%, #161208 0%, #000000 100%),
+                radial-gradient(rgba(212, 175, 55, 0.3) 1.5px, transparent 1.5px),
+                radial-gradient(rgba(212, 175, 55, 0.15) 2px, transparent 2px);
+            background-size: 100% 100%, 40px 40px, 60px 60px;
+            background-position: 0 0, 0 0, 20px 20px;
+            
+            /* توسيط العناصر في منتصف الشاشة تماماً */
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 100vh;
         }
 
-        .container {
+        /* تصميم صندوق الدخول لتناسق المظهر */
+        .login-box {
+            background: rgba(0, 0, 0, 0.75);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid #d4af37; /* إطار ذهبي ناعم */
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+            text-align: center;
             width: 100%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            margin-top: 20px;
-            /* واجهة زجاجية داكنة متناسقة مع الهيبة العسكرية */
-            background: rgba(0, 0, 0, 0.75); 
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 223, 0, 0.3); 
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 223, 0, 0.1);
-            box-sizing: border-box;
-        }
-
-        .header-card {
-            text-align: center;
-            position: relative;
-        }
-
-        .header-logo {
-            max-width: 100%;
-            height: auto;
-            max-height: 120px;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto;
-            border-radius: 10px;
-        }
-
-        .main-btn {
-            background: linear-gradient(135deg, #111111, #1a1a1a, #28231a);
-            border: 1px solid rgba(255, 223, 0, 0.15);
-            border-radius: 15px;
-            padding: 25px 20px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-color);
-            display: block;
-            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
-        }
-
-        .main-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--gold-glow);
-            border-color: var(--neon-gold);
-        }
-
-        .btn-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--neon-gold);
-            text-shadow: 0 0 10px rgba(255, 223, 0, 0.4);
-            margin-bottom: 8px;
-        }
-
-        .btn-desc {
-            font-size: 14px;
-            color: #ccccba;
-        }
-
-        .admin-trigger {
-            margin-top: auto;
-            padding: 10px;
-            background: none;
-            border: none;
-            color: #7a6f58;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: bold;
-            transition: color 0.2s;
-            text-shadow: 0 1px 5px black;
-        }
-        .admin-trigger:hover {
-            color: var(--neon-gold);
-        }
-
-        .admin-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #111111;
-            border: 2px solid var(--neon-gold);
-            border-radius: 15px;
-            padding: 20px;
-            z-index: 1000;
-            width: 90%;
             max-width: 400px;
-            box-shadow: var(--gold-glow), 0 0 50px rgba(0,0,0,0.9);
         }
 
-        .admin-modal h3 {
-            margin-top: 0;
-            color: var(--neon-gold);
-            text-align: center;
+        .login-box h2 {
+            color: #d4af37;
+            margin-bottom: 30px;
         }
 
-        .admin-modal label {
-            color: #dddddd;
-            font-size: 14px;
-        }
-
-        .admin-modal input {
+        /* تصميم حقل كلمة المرور وزر الإظهار */
+        .password-container {
+            position: relative;
             width: 100%;
-            padding: 10px;
-            margin: 8px 0 18px 0;
-            box-sizing: border-box;
-            background: #222222;
-            border: 1px solid #444444;
-            color: white;
-            border-radius: 5px;
+            margin-bottom: 20px;
         }
-        .admin-modal input:focus {
-            border-color: var(--neon-gold);
+
+        .password-container input {
+            width: 100%;
+            padding: 12px 15px;
+            padding-left: 60px; /* ترك مسافة لزر الإظهار جهة اليسار */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #555;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
             outline: none;
+            transition: 0.3s;
         }
 
-        .modal-btns {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
+        .password-container input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
         }
 
-        .modal-btns button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+        .toggle-btn {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d4af37;
             cursor: pointer;
+            font-size: 14px;
+            user-select: none;
             font-weight: bold;
         }
 
-        .btn-save { background: var(--neon-gold); color: #000000; }
-        .btn-close { background: #333333; color: white; }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 999;
+        .toggle-btn:hover {
+            color: #fff;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="login-box">
+        <h2>تسجيل الدخول</h2>
         
-        <!-- قسم الشعار العلوي (يمكنك استبداله برابط صورة من لوحة الإدارة) -->
-        <div class="header-card">
-            <img id="main-logo" class="header-logo" src="https://placehold.co/600x200/0a0a0a/ffdf00?text=FOREST+POLICE" alt="Logo">
-        </div>
-
-        <!-- الخيار الأول: مايكرو فصيل فورست -->
-        <a href="#" id="link1" class="main-btn" target="_blank">
-            <div class="btn-title">مايكرو الخاص بفصيل شرطة فورست</div>
-            <div class="btn-desc">قائمة الأوامر والانتهاكات الكاملة للفصيل</div>
-        </a>
-
-        <!-- الخيار الثاني: دليل شرطة فورست -->
-        <a href="#" id="link2" class="main-btn" target="_blank">
-            <div class="btn-title">دليل شرطة فورست</div>
-            <div class="btn-desc">الأنظمة والتعليمات والقوانين الإرشادية</div>
-        </a>
-
-        <!-- زر الإدارة السري -->
-        <button class="admin-trigger" onclick="checkCode()">⚙️ إدارة الموقع والروابط</button>
-    </div>
-
-    <!-- لوحة التحكم الإدارية -->
-    <div class="overlay" id="overlay"></div>
-    <div class="admin-modal" id="adminModal">
-        <h3>لوحة التحكم الفخمة</h3>
-        <label>رابط الصورة العلوية (الشعار):</label>
-        <input type="text" id="input-logo" placeholder="ضع رابط الصورة هنا">
-        
-        <label>رابط المايكرو (الخيار الأول):</label>
-        <input type="text" id="input-link1" placeholder="https://...">
-        
-        <label>رابط الدليل (الخيار الثاني):</label>
-        <input type="text" id="input-link2" placeholder="https://...">
-        
-        <div class="modal-btns">
-            <button class="btn-save" onclick="saveSettings()">حفظ التعديلات</button>
-            <button class="btn-close" onclick="closeAdmin()">إلغاء</button>
-        </div>
-    </div>
-
-    <script>
-        const SECRET_CODE = "1221";
-
-        window.onload = function() {
-            if(localStorage.getItem('logoUrl_gold')) {
-                document.getElementById('main-logo').src = localStorage.getItem('logoUrl_gold');
-            }
-            if(localStorage.getItem('url1_gold')) {
-                document.getElementById('link1').href = localStorage.getItem('url1_gold');
-            }
-            if(localStorage.getItem('url2_gold')) {
-                document.getElementById('link2').href = localStorage.getItem('url2_gold');
-            }
-        }
-
-        function checkCode() {
-            let password = prompt("الرجاء إدخال الرمز السري للتعديل (1221):");
-            if (password === SECRET_CODE) {
-                openAdmin();
-            } else if (password !== null) {
-                alert("الرمز السري خاطئ!");
-            }
-        }
-
-        function openAdmin() {
-            document.getElementById('overlay').style.display = 'block';
-            document.getElementById('adminModal').style.display = 'block';
+        <div class="password-container">
+            <!-- حقل كلمة المرور النظيف -->
+            <input type="password" id="passwordField" placeholder="أدخل كلمة المرور">
             
-            document.getElementById('input-logo').value = document.getElementById('main-logo').src;
-            document.getElementById('input-link1').value = document.getElementById('link1').href;
-            document.getElementById('input-link2').value = document.getElementById('link2').href;
-        }
+            <!-- زر الإظهار والإخفاء الذي يحل مشكلة الأقواس -->
+            <span class="toggle-btn" id="togglePassword" onclick="togglePass()">إظهار</span>
+        </div>
+    </div>
 
-        function closeAdmin() {
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('adminModal').style.display = 'none';
-        }
-
-        function saveSettings() {
-            let logoUrl = document.getElementById('input-logo').value;
-            let url1 = document.getElementById('input-link1').value;
-            let url2 = document.getElementById('input-link2').value;
-
-            if(logoUrl) {
-                document.getElementById('main-logo').src = logoUrl;
-                localStorage.setItem('logoUrl_gold', logoUrl);
+    <!-- 2. كود الجافا سكريبت لحل مشكلة إظهار كلمة المرور بدون أقواس -->
+    <script>
+        function togglePass() {
+            var passwordField = document.getElementById("passwordField");
+            var toggleText = document.getElementById("togglePassword");
+            
+            // نغير فقط نوع الحقل (Type) للحفاظ على النص الأصلي دون تعديل أو إضافة أقواس
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleText.textContent = "إخفاء";
+            } else {
+                passwordField.type = "password";
+                toggleText.textContent = "إظهار";
             }
-            if(url1) {
-                document.getElementById('link1').href = url1;
-                localStorage.setItem('url1_gold', url1);
-            }
-            if(url2) {
-                document.getElementById('link2').href = url2;
-                localStorage.setItem('url2_gold', url2);
-            }
-
-            alert("تم حفظ التعديلات بنجاح!");
-            closeAdmin();
         }
     </script>
+
 </body>
 </html>
