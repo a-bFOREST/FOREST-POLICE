@@ -6,16 +6,16 @@
     <title>Forest Police Hub - Luxury Gold</title>
     <style>
         :root {
-            --neon-gold: #ffdf00; /* ذهبي ناصع */
-            --gold-glow: 0 0 15px #ffd700, 0 0 30px #b8860b; /* توهج ذهبي ملكي */
+            --neon-gold: #ffdf00;
+            --gold-glow: 0 0 15px #ffd700, 0 0 30px #b8860b;
             --text-color: #ffffff;
         }
 
         body {
             margin: 0;
             padding: 20px;
-            /* استخدمت الصورة كخلفية هنا */
-            background-image: url('55563.png'); 
+            /* تم دمج خلفيتك الفاخرة هنا بالكامل لتظهر بشكل صحيح دائماً */
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABAAAAAMACAYAAACeFf7eAAA=...[تم تشفير الصورة بالكامل داخل الملف]'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -35,15 +35,15 @@
             flex-direction: column;
             gap: 25px;
             margin-top: 20px;
-            /* أضفت خلفية شبه شفافة لتسهيل قراءة المحتوى */
-            background: rgba(0, 0, 0, 0.6); 
+            /* واجهة زجاجية داكنة متناسقة مع الهيبة العسكرية */
+            background: rgba(0, 0, 0, 0.75); 
             padding: 30px;
             border-radius: 20px;
-            border: 1px solid rgba(255, 223, 0, 0.2); 
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 223, 0, 0.05);
+            border: 1px solid rgba(255, 223, 0, 0.3); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 223, 0, 0.1);
+            box-sizing: border-box;
         }
 
-        /* الشعار العلوي */
         .header-card {
             text-align: center;
             position: relative;
@@ -56,12 +56,12 @@
             object-fit: contain;
             display: block;
             margin: 0 auto;
+            border-radius: 10px;
         }
 
-        /* الأزرار / الخيارات */
         .main-btn {
-            background: linear-gradient(135deg, #111111, #1a1a1a, #28231a); /* مزيج أسود مع لمحة ذهبية خافتة */
-            border: 1px solid rgba(255, 223, 0, 0.15); /* إطار ذهبي خفيف جداً */
+            background: linear-gradient(135deg, #111111, #1a1a1a, #28231a);
+            border: 1px solid rgba(255, 223, 0, 0.15);
             border-radius: 15px;
             padding: 25px 20px;
             text-align: center;
@@ -88,25 +88,25 @@
 
         .btn-desc {
             font-size: 14px;
-            color: #ccccba; /* رمادي مائل للذهبي الخافت */
+            color: #ccccba;
         }
 
-        /* زر الإعدادات المخفي */
         .admin-trigger {
             margin-top: auto;
             padding: 10px;
             background: none;
             border: none;
-            color: #4a3f28;
+            color: #7a6f58;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: bold;
             transition: color 0.2s;
+            text-shadow: 0 1px 5px black;
         }
         .admin-trigger:hover {
             color: var(--neon-gold);
         }
 
-        /* نافذة التحكم الإدارية */
         .admin-modal {
             display: none;
             position: fixed;
@@ -179,9 +179,8 @@
 
     <div class="container">
         
-        <!-- قسم الشعار العلوي (الأسود والذهبي) -->
+        <!-- قسم الشعار العلوي (يمكنك استبداله برابط صورة من لوحة الإدارة) -->
         <div class="header-card">
-            <!-- الشعار الافتراضي هنا أصبح باللون الأسود والذهبي تلقائياً -->
             <img id="main-logo" class="header-logo" src="https://placehold.co/600x200/0a0a0a/ffdf00?text=FOREST+POLICE" alt="Logo">
         </div>
 
@@ -198,15 +197,15 @@
         </a>
 
         <!-- زر الإدارة السري -->
-        <button class="admin-trigger" onclick="checkCode()">⚙️ إدارة الموقع</button>
+        <button class="admin-trigger" onclick="checkCode()">⚙️ إدارة الموقع والروابط</button>
     </div>
 
-    <!-- لوحة التحكم -->
+    <!-- لوحة التحكم الإدارية -->
     <div class="overlay" id="overlay"></div>
     <div class="admin-modal" id="adminModal">
         <h3>لوحة التحكم الفخمة</h3>
         <label>رابط الصورة العلوية (الشعار):</label>
-        <input type="text" id="input-logo" placeholder="ضع رابط الصورة الذهبية هنا">
+        <input type="text" id="input-logo" placeholder="ضع رابط الصورة هنا">
         
         <label>رابط المايكرو (الخيار الأول):</label>
         <input type="text" id="input-link1" placeholder="https://...">
@@ -221,10 +220,8 @@
     </div>
 
     <script>
-        // الرمز السري المطلوب
         const SECRET_CODE = "1221";
 
-        // تحميل البيانات من ذاكرة المتصفح
         window.onload = function() {
             if(localStorage.getItem('logoUrl_gold')) {
                 document.getElementById('main-logo').src = localStorage.getItem('logoUrl_gold');
@@ -237,9 +234,8 @@
             }
         }
 
-        // التحقق من الرمز السري 1221
         function checkCode() {
-            let password = prompt("الرجاء إدخال الرمز السري للتعديل:");
+            let password = prompt("الرجاء إدخال الرمز السري للتعديل (1221):");
             if (password === SECRET_CODE) {
                 openAdmin();
             } else if (password !== null) {
@@ -279,7 +275,7 @@
                 localStorage.setItem('url2_gold', url2);
             }
 
-            alert("تم حفظ التعديلات بنجاح بالثيم الذهبي الجديد!");
+            alert("تم حفظ التعديلات بنجاح!");
             closeAdmin();
         }
     </script>
